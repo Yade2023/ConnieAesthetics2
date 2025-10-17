@@ -36,7 +36,7 @@ onUnmounted(() => {
       <div class="navbar-content">
         <!-- 左側：Logo 和品牌名稱 -->
         <router-link to="/" class="logo-link" aria-label="康妮泌乳美學首頁">
-          <img src="./LOGO.png" alt="康妮泌乳美學 Logo" class="main-logo" loading="eager" width="40" height="40" />
+          <img src="../public/LOGO.png" alt="康妮泌乳美學 Logo" class="main-logo" loading="eager" width="40" height="40" />
           <span class="brand">康妮泌乳美學</span>
         </router-link>
         
@@ -51,10 +51,10 @@ onUnmounted(() => {
         <div class="navbar-actions">
           <a href="#" class="contact-btn" @click.prevent="showModal = true">連絡我們／預約諮詢</a>
           <a href="https://www.instagram.com/connie_cares_spa/" target="_blank" class="social-btn" aria-label="Instagram">
-            <img src="./IG.png" alt="Instagram" loading="lazy" width="22" height="22" />
+            <img src="../public/IG.png" alt="Instagram" loading="lazy" width="22" height="22" />
           </a>
           <a href="https://www.facebook.com/conniecares1990" target="_blank" class="social-btn" aria-label="Facebook">
-            <img src="./FB.ico" alt="Facebook" loading="lazy" width="22" height="22" />
+            <img src="../public/FB.ico" alt="Facebook" loading="lazy" width="22" height="22" />
           </a>
         </div>
       </div>
