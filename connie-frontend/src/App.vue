@@ -195,21 +195,26 @@ onUnmounted(() => {
   .navbar-content {
     padding: 0 1rem;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 1rem;
+  }
+  
+  .logo-link {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
   }
   
   .nav-menu {
     width: 100%;
     justify-content: center;
     flex-wrap: wrap;
+    margin-right: 0;
   }
   
   .navbar-actions {
     width: 100%;
-    margin-left: 60px;
-
     justify-content: center;
+    margin-left: 0;
   }
   
   .main-content { 
@@ -220,25 +225,70 @@ onUnmounted(() => {
 
 @media (max-width: 768px) {
   .navbar-actions {
-    gap: 0.3rem;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   
   .social-btn {
     padding: 0.4rem;
+    min-width: 44px;
+    min-height: 44px;
   }
   
   .contact-btn {
-    padding: 0.4rem 0.8rem;
+    padding: 0.5rem 1rem;
     font-size: 0.9rem;
+    white-space: nowrap;
   }
   
   .nav-menu {
-    gap: 1.5rem;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
   }
   
   .nav-menu a {
     font-size: 1rem;
+    padding: 0.5rem 0.8rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .brand {
+    font-size: 1.3rem;
+  }
+  
+  .main-content {
+    margin-top: 0.5rem;
+    padding: 1rem 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-content {
+    padding: 0 0.5rem;
+  }
+  
+  .brand {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+  }
+  
+  .nav-menu a {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.6rem;
+  }
+  
+  .contact-btn {
+    font-size: 0.8rem;
     padding: 0.4rem 0.8rem;
+  }
+  
+  .main-content {
+    padding: 0.8rem 0.5rem;
+    margin-top: 0.3rem;
   }
 }
 .site-footer {

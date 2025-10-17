@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>重定向中...</title>
+    <script type="text/javascript">
+      // GitHub Pages SPA 重定向
+      // 將所有 404 請求重定向到 index.html
+      
+      var segmentCount = 1; // 根據您的倉庫名稱調整：ConnieAesthetics2 = 1
+      
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(segmentCount).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body>
+    <div style="text-align: center; margin-top: 50px; font-family: Arial, sans-serif;">
+      <h2>正在重定向到正確的頁面...</h2>
+      <p>如果頁面沒有自動跳轉，請 <a href="/ConnieAesthetics2/">點擊這裡</a></p>
+    </div>
+  </body>
+</html>

@@ -76,5 +76,28 @@
   <body>
     <div id="app"></div>
     <script type="module" src="./src/main.js"></script>
+    
+    <!-- GitHub Pages SPA 重定向腳本 -->
+    <script>
+      // 檢查是否在 GitHub Pages 環境中且遇到 404
+      if (window.location.pathname.includes('/ConnieAesthetics2/') && 
+          !window.location.pathname.endsWith('/ConnieAesthetics2/') &&
+          !window.location.pathname.endsWith('/ConnieAesthetics2/index.html')) {
+        
+        // 重定向到正確的路徑
+        var currentPath = window.location.pathname;
+        var basePath = '/ConnieAesthetics2/';
+        var targetPath = basePath + '?/' + currentPath.replace(basePath, '').replace(/^\//, '');
+        
+        if (window.location.search) {
+          targetPath += '&' + window.location.search.slice(1);
+        }
+        if (window.location.hash) {
+          targetPath += window.location.hash;
+        }
+        
+        window.location.replace(targetPath);
+      }
+    </script>
   </body>
 </html>
