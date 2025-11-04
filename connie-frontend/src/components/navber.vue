@@ -4,7 +4,7 @@
       <div class="navbar-content">
         <!-- 左側：Logo 和品牌名稱 -->
         <router-link to="/" class="logo-link" aria-label="康妮泌乳美學首頁">
-          <img src="/img/LOGO.png" alt="康妮泌乳美學 Logo" class="main-logo" loading="eager" width="40" height="40" />
+          <img :src="connieLogo" alt="康妮泌乳美學 Logo" class="main-logo" loading="eager" width="40" height="40" />
           <span class="brand">康妮泌乳美學</span>
         </router-link>
         
@@ -19,10 +19,10 @@
         <div class="navbar-actions">
           <a href="#" class="contact-btn" @click.prevent="openContactModal">連絡我們／預約諮詢</a>
           <a href="https://www.instagram.com/connie_cares_spa/" target="_blank" class="social-btn" aria-label="Instagram">
-            <img src="/img/IG.png" alt="Instagram" loading="lazy" width="22" height="22" />
+            <img :src="igLogo" alt="Instagram" loading="lazy" width="22" height="22" />
           </a>
           <a href="https://www.facebook.com/conniecares1990" target="_blank" class="social-btn" aria-label="Facebook">
-            <img src="/iconn/FB.ico" alt="Facebook" loading="lazy" width="22" height="22" />
+            <img :src="fbLogo" alt="Facebook" loading="lazy" width="22" height="22" />
           </a>
         </div>
       </div>
@@ -32,6 +32,9 @@
 
 <script setup>
 import '../assets/css/navber.css';
+import connieLogo from '../../public/logo/logoConnie.png';
+import igLogo from '../../public/logo/logoIg.png';
+import fbLogo from '../../public/iconn/FB.ico';
 //通知其他元件開啟彈窗
 const openContactModal = () => {
   console.log('觸發聯絡模態框'); // 除錯用

@@ -42,7 +42,7 @@
     left: -5%;
     width: 110%;
     height: 130%;
-    background-image: url('/img/ConnieImg/carousel1.jpg');
+    background-image: url('../../../public/img/carousel1.jpg');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;

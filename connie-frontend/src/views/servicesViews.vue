@@ -49,6 +49,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import '../assets/css/services.css';
 
 const services = ref([]);
 const loading = ref(false);

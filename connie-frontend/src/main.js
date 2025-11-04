@@ -1,8 +1,6 @@
 import './assets/css/main.css'
 import './assets/css/global.css'
-import './assets/css/home.css'
-import './assets/css/services.css'
-import './assets/css/teachers.css'
+import './assets/css/home.css';
 
 import { createApp } from 'vue'
 import App from './App.vue'
