@@ -30,12 +30,12 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import '../assets/css/footer.css';
-import youyiLogo from '/img/logo攸羿美學.jpg';
-import rebirthLogo from '/img/logo芮貝斯美學.jpg';
-import lakeLogo from '/img/logo萊可美學.jpg';
-import mumin from '/img/logo沐敏生活美學.jpg';
-import goodPregnancy from '/img/logo幸孕媽咪spa.jpg';
-import warmJar from '/img/logo溫罐好好.jpg';
+import youyiLogo from '../../public/img/logo攸羿美學.jpg';
+import rebirthLogo from '../../public/img/logo芮貝斯美學.jpg';
+import lakeLogo from '../../public/img/logo萊可美學.jpg';
+import mumin from '../../public/img/logo沐敏生活美學.jpg';
+import goodPregnancy from '../../public/img/logo幸孕媽咪spa.jpg';
+import warmJar from '../../public/img/logo溫罐好好.jpg';
 const viewCount = ref(0);
 
 // 合作夥伴資料
