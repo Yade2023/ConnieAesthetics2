@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router';
-import Home from '../components/Home.vue';
+import Home from '../views/homeViews.vue';
 import News from '../components/News.vue';
-import Services from '../components/Services.vue';
-import Teachers from '../components/Teachers.vue';
+import Services from '../views/servicesViews.vue';
+import Teachers from '../views/teachersViews.vue';
 
 // 檢查是否在 GitHub Pages 環境中
 const isGitHubPages = window.location.hostname.includes('github.io') || 
@@ -13,9 +13,9 @@ const router = createRouter({
   history: isGitHubPages ? createWebHashHistory(import.meta.env.BASE_URL) : createWebHistory(import.meta.env.BASE_URL),
   routes : [
   { path: '/', component: Home },
-  { path: '/news', component: News },
+  // { path: '/news', component: News },
   { path: '/services', component: Services },
-  { path: '/teachers', component: Teachers },
+  { path: '/teachersViews', component: Teachers },
 ],
   
 });

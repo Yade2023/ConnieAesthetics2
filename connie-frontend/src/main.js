@@ -1,7 +1,6 @@
-import './assets/main.css'
+import './assets/css/main.css'
 import './assets/css/global.css'
 import './assets/css/home.css'
-import './assets/css/news.css'
 import './assets/css/services.css'
 import './assets/css/teachers.css'
 

@@ -1,6 +1,7 @@
 <template>
-  <div v-if="show" class="modal-overlay" @click.self="close" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="modal-content" role="document">
+  <div v-if="show" class="modal-overlay" @click.self="close" role="dialog" aria-modal="true"
+    aria-labelledby="modal-title">
+    <div class="modal-content" @click="stopPropagation" role="document">
       <div class="modal-header">
         <h2 id="modal-title">聯絡我們</h2>
         <p v-if="selectedService" class="service-note">
@@ -8,45 +9,51 @@
         </p>
         <p v-else class="welcome-note">歡迎與我們聯繫，我們將為您提供專業的服務</p>
       </div>
-      
+
       <div class="contact-methods">
         <div class="contact-method">
           <div class="method-icon">📱</div>
           <h3>Line 諮詢</h3>
           <p>掃描 QR Code 加入我們的 Line</p>
-          <img src="/ConnieLineQRCode.jpg" alt="Line QR Code" class="qrcode-img" />
+          <img src="../../public/img/ConnieLineQRCode.jpg" alt="Line QR Code" class="qrcode-img" />
         </div>
-        
+
         <div class="contact-method">
-          <div class="method-icon">📞</div>
-          <h3>電話諮詢</h3>
-          <p>直接撥打電話與我們聯繫</p>
-          <a href="tel:+886-2-1234-5678" class="phone-link">02-1234-5678</a>
+          <div class="method-icon">📍</div>
+          <h3>地址位置</h3>
+          <p>338桃園市蘆竹區大竹北路15巷6號3樓</p>
+          <div class="map-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d903.7852174767253!2d121.252832!3d25.029293!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346821fe1ee8a903%3A0xf9c724e24c8278fa!2z5bq35aau576O5a24L-WtleWppuaMieaRqS_nlKLlvozmjInmkakv6auU5oWL6Kq_55CG!5e0!3m2!1szh-TW!2stw!4v1762227319827!5m2!1szh-TW!2stw"
+              width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
         </div>
-        
-        <div class="contact-method">
-          <div class="method-icon">📧</div>
-          <h3>Email 諮詢</h3>
-          <p>發送郵件給我們</p>
-          <a href="mailto:info@conniecares.com" class="email-link">info@conniecares.com</a>
-        </div>
+
       </div>
-      
+
       <button class="close-btn" @click="close" aria-label="關閉對話框">關閉</button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from 'vue';
-
-const props = defineProps({ 
+const props = defineProps({
   show: Boolean,
-  selectedService: String 
+  selectedService: String
 });
 
 const emit = defineEmits(['close']);
-const close = () => emit('close');
+
+const close = () => {
+  console.log('關閉模態框'); // 除錯用
+  emit('close');
+};
+
+// 防止事件冒泡
+const stopPropagation = (event) => {
+  event.stopPropagation();
+};
 </script>
 
 <style scoped>
@@ -60,7 +67,7 @@ const close = () => emit('close');
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2000;
+  z-index: 9999;
   padding: 1rem;
 }
 
@@ -103,15 +110,17 @@ const close = () => emit('close');
 }
 
 .contact-methods {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
 
 .contact-method {
   text-align: center;
-  padding: 1.5rem;
+  padding: 0.5rem;
   background: #f8f9fa;
   border-radius: 12px;
   transition: transform 0.3s ease;
@@ -122,8 +131,8 @@ const close = () => emit('close');
 }
 
 .method-icon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
 }
 
 .contact-method h3 {
@@ -147,7 +156,15 @@ const close = () => emit('close');
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.phone-link, .email-link {
+.map-container {
+  margin-top: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.phone-link,
+.email-link {
   color: #e9aebc;
   text-decoration: none;
   font-weight: 600;
@@ -155,7 +172,8 @@ const close = () => emit('close');
   transition: color 0.3s;
 }
 
-.phone-link:hover, .email-link:hover {
+.phone-link:hover,
+.email-link:hover {
   color: #d16d8a;
 }
 
@@ -184,14 +202,13 @@ const close = () => emit('close');
     padding: 1.5rem;
     margin: 1rem;
   }
-  
+
   .contact-methods {
-    grid-template-columns: 1fr;
     gap: 1rem;
   }
-  
+
   .modal-header h2 {
     font-size: 1.5rem;
   }
 }
-</style> 
+</style>

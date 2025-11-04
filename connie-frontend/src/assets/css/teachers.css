@@ -1,3 +1,24 @@
-.teachers-page { padding: 1.2rem 2rem 1.2rem 2rem; }
-.teachers-page h1 { color: #d16d8a; margin-top: 0.5rem; margin-bottom: 1.5rem; font-size: 2.5rem; text-align: center; }
-.teachers-page li { margin-bottom: 1.2em; } 
+.teachers-page {
+    /* padding: 1.2rem 2rem 1.2rem 2rem; */
+    max-width: 800px;
+    margin: 0 auto;
+    height: auto;
+}
+
+.teachers-page h1 {
+    color: #d16d8a;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.teachers-page li {
+    margin-bottom: 1.2em;
+}
+.teachers-page img {
+    width: 100%;
+    height: 600px;
+    display: block;
+    margin: 0 auto;
+}
