@@ -75,12 +75,46 @@
   background: #d16d8a;
 }
 
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
+/* 服務容器 */
+.services-container {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* 服務分類 */
+.service-category {
+  margin-bottom: 4rem;
+}
+
+.category-title {
+  font-size: 2rem;
+  color: #103b3c;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.category-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(135deg, #e9aebc 0%, #d16d8a 100%);
+  border-radius: 2px;
+}
+
+/* 服務網格 */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
 }
 
 .service-card {
@@ -190,7 +224,12 @@
   box-shadow: 0 6px 20px rgba(233, 174, 188, 0.4);
 }
 
+/* 響應式設計 */
 @media (max-width: 768px) {
+  .services-page {
+    padding: 1rem;
+  }
+  
   .services-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -206,5 +245,28 @@
 
   .page-subtitle {
     font-size: 1rem;
+  }
+  
+  .category-title {
+    font-size: 1.5rem;
+  }
+  
+  .service-category {
+    margin-bottom: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .service-card {
+    padding: 1rem;
+  }
+  
+  .category-title {
+    font-size: 1.3rem;
   }
 }

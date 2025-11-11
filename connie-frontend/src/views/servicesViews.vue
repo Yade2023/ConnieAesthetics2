@@ -1,151 +1,89 @@
 <template>
   <div class="services-page">
-    <div class="page-header">
-      <h1>服務項目</h1>
-      <p class="page-subtitle">專業的泌乳美學服務，為每位媽媽提供最貼心的照護</p>
-    </div>
-
     <div v-if="loading" class="loading-container">
       <div class="loading-spinner"></div>
       <p>載入中...</p>
     </div>
 
-    <div v-else-if="error" class="error-container">
-      <p>載入服務資訊時發生錯誤，請稍後再試</p>
-      <button @click="loadServices" class="retry-button">重新載入</button>
-    </div>
-    <div v-else class="services-grid">
-      <div v-for="(item, index) in services" :key="item.Id" class="service-card"
-        :style="{ animationDelay: `${index * 0.1}s` }">
-        <div class="service-icon">
-          <img 
-            :src="item.Icon" 
-            :alt="item.Name" 
-            @error="handleImageError"
-            @load="handleImageLoad"
+    <div v-else class="services-container">
+      <!-- 遍歷所有服務分類 -->
+      <div v-for="(services, category) in servicesData" :key="category" class="service-category">
+        <h2 class="category-title">{{ category }}</h2>
+        <div class="services-grid">
+          <ProductCard
+            v-for="(service, index) in services"
+            :key="`${category}-${index}`"
+            :image="getServiceImage(category, service.課程名稱)"
+            :name="service.課程名稱"
+            :time="service.時間"
           />
-        </div>
-        <div class="service-content">
-          <h3 class="service-title">{{ item.Name }}</h3>
-          <p class="service-description">{{ item.Description }}</p>
-          <div class="service-details">
-            <div class="service-price">{{ item.Price }}</div>
-            <div class="service-duration">{{ item.Duration }}</div>
-          </div>
-          <div class="service-details">
-            <div class="service-price">{{ item.Price2 }}</div>
-            <div class="service-duration">{{ item.Duration2 }}</div>
-          </div>
-        </div>
-        <div class="service-actions">
-          <button class="inquiry-button" @click="openInquiry(item.Name)">
-            立即諮詢
-          </button>
         </div>
       </div>
     </div>
   </div>
 </template>
+---------------------------------------
 
 <script setup>
 import { ref, onMounted } from 'vue';
 import '../assets/css/services.css';
+import ProductCard from '@/components/card.vue';
+import servicesJson from '../assets/json/服務項目.json';
 
-const services = ref([]);
-const loading = ref(false);
-const error = ref(false);
+// 響應式數據
+const loading = ref(true);
+const servicesData = ref({});
 
-// 獲取正確的基礎路徑
-const getImagePath = (imageName) => {
-  const base = import.meta.env.BASE_URL || '/';
-  return `${base}img/${imageName}`;
+// 根據分類和服務名稱獲取對應的圖片
+const getServiceImage = (category, serviceName) => {
+  // 根據具體服務名稱映射到對應的圖片 - 使用更豐富的圖片分配
+  const serviceImageMap = {
+    // 孕期課程 - 使用孕期資料夾的所有圖片
+    '孕婦按摩': '/img/孕期/孕婦按摩.png',
+    '孕期乳肩舒緩按摩': '/img/孕期/孕期乳肩舒緩按摩.png',
+    '產前乳腺保養': '/img/孕期/產前乳腺保養.jpg',
+    
+    // 產後課程 - 分配不同的產後圖片
+    '子宮按摩': '/img/產後/產後子宮按摩.png',
+    '泌乳疏通按摩': '/img/產後/什麼時候需要泌乳師.jpg',
+    '產後按摩': '/img/產後/產後按摩.png',
+    '臀腿按摩': '/img/產後/臀腿按摩.jpg',
+    '美式骨盆調理': '/img/產後/美式骨盆調理.png',
+    '腹直肌復位調理': '/img/產後/產後子宮按摩適合時機.png',
+    '紮肚技術費/次': '/img/產後/產後子宮按摩到院服務.png',
+    
+    // 放鬆課程
+    '女性艾草溫罐': '/img/放鬆/艾草溫冠.jpg',
+    '女性按摩': '/img/放鬆/駝背紓壓調理.png',
+    '美胸按摩': '/img/放鬆/美胸按摩.png',
+    '美胸假體按摩': '/img/放鬆/美胸按摩.png',
+    '女性私密處除毛': '/img/放鬆/駝背紓壓調理.png',
+    
+    // 攜伴可約
+    '男性艾草溫罐': '/img/放鬆/艾草溫冠.jpg',
+    '男性按摩': '/img/放鬆/駝背紓壓調理.png',
+    '男性私密處除毛': '/img/放鬆/駝背紓壓調理.png'
+  };
+
+  // 根據服務名稱獲取對應圖片，如果沒有就使用預設圖片
+  const imagePath = serviceImageMap[serviceName] || '/img/康妮老師介紹.jpg';
+  
+  // 調試信息
+  console.log(`分類: ${category}, 服務: ${serviceName}, 圖片路徑: ${imagePath}`);
+  console.log(`BASE_URL: ${import.meta.env.BASE_URL}`);
+  
+  return imagePath;
 };
 
-// 靜態服務數據
-const staticServices = [
-  {
-    Id: 1,
-    Icon: getImagePath("產後駝背調理.png"),
-    Name: "產後駝背調理",
-    Description: "現在還在駝背的妳不論是曾經工作姿勢不良累積還是育兒的姿勢導致，產後修護是給自己一次重生的機會選擇專業產康老師，邁向自信的開始💜🩵💙",
-    Price: "NT$2000",
-    Price2: "NT$3000",
-    Duration: "80分鐘",
-    Duration2: "120分鐘"
-  },
-  {
-    Id: 2,
-    Icon: getImagePath("ConnieCares.png"),
-    Name: "胸部按摩",
-    Description: "專業胸部按摩服務，促進血液循環，緩解胸部不適，提升哺乳品質",
-    Price: "NT$ 2,000/次",
-    Duration: "90分鐘"
-  },
-  {
-    Id: 3,
-    Icon: getImagePath("LOGO.png"),
-    Name: "草本護理",
-    Description: "使用天然草本成分進行胸部護理，溫和滋潤，適合敏感肌膚",
-    Price: "NT$ 1,800/次",
-    Duration: "75分鐘"
-  },
-  {
-    Id: 4,
-    Icon: getImagePath("ConnieCares.png"),
-    Name: "放鬆療程",
-    Description: "結合按摩與放鬆技巧，幫助媽媽減壓，提升整體身心健康",
-    Price: "NT$ 2,500/次",
-    Duration: "120分鐘"
-  },
-  {
-    Id: 5,
-    Icon: getImagePath("LOGO.png"),
-    Name: "育兒指導",
-    Description: "提供專業育兒知識指導，包括哺乳技巧、嬰兒照護等實用資訊",
-    Price: "NT$ 1,200/次",
-    Duration: "45分鐘"
-  },
-  {
-    Id: 6,
-    Icon: getImagePath("ConnieCares.png"),
-    Name: "產後恢復",
-    Description: "針對產後媽媽的專業恢復服務，幫助身體快速回到最佳狀態",
-    Price: "NT$ 3,000/次",
-    Duration: "150分鐘"
-  }
-];
-
-const loadServices = () => {
-  loading.value = true;
-  error.value = false;
-
-  // 模擬載入時間
-  setTimeout(() => {
-    services.value = staticServices;
-    loading.value = false;
-  }, 500);
-};
-
-const openInquiry = (serviceName) => {
-  // 觸發聯絡我們模態框，並傳遞服務名稱
-  const event = new CustomEvent('openContactModal', {
-    detail: { service: serviceName }
-  });
-  window.dispatchEvent(event);
-};
-
-const handleImageError = (event) => {
-  console.error('圖片載入失敗:', event.target.src);
-  // 設置備用圖片或隱藏圖片
-  event.target.style.display = 'none';
-};
-
-const handleImageLoad = (event) => {
-  console.log('圖片載入成功:', event.target.src);
-};
-
+// 載入服務數據
 onMounted(() => {
-  loadServices();
+  try {
+    servicesData.value = servicesJson;
+    loading.value = false;
+  } catch (error) {
+    console.error('載入服務數據失敗:', error);
+    loading.value = false;
+  }
 });
 </script>
 

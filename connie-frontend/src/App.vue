@@ -5,7 +5,7 @@
       <router-view />
     </main>
     <ContactModal :show="showModal" :selected-service="selectedService" @close="showModal = false" />
-
+    <ScrollToTop />
     <Footer />
   </div>
 </template>
@@ -15,6 +15,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import navber from './components/navber.vue';
 import Footer from './components/Footer.vue';
 import ContactModal from './components/ContactModal.vue';
+import ScrollToTop from './components/ScrollToTop.vue';
 
 const showModal = ref(false);
 const selectedService = ref('');
